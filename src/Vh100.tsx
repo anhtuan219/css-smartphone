@@ -1,6 +1,10 @@
 import React from "react";
 
-const Vh100 = () => {
+interface IProps {
+  setIsPrePage: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Vh100 = ({ setIsPrePage }: IProps) => {
   return (
     <div
       style={
@@ -13,6 +17,13 @@ const Vh100 = () => {
       className="container"
     >
       <p>Text start</p>
+      <button
+        onClick={() => {
+          setIsPrePage(true);
+        }}
+      >
+        Go to pre page
+      </button>
       <p style={{ position: "absolute", bottom: 0, backgroundColor: "yellow" }}>
         Text end
       </p>
