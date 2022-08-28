@@ -1,5 +1,5 @@
 import React from "react";
-
+import { debounce } from "lodash";
 interface IProps {
   setIsPrePage: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -11,10 +11,18 @@ const Vh100 = ({ setIsPrePage }: IProps) => {
     setVh(window.innerHeight * 0.01);
   };
 
+  const debounceHandleResizeWindowInnerHeight = debounce(
+    handleResizeWindowInnerHeight,
+    200
+  );
+
   React.useEffect(() => {
-    window.addEventListener("resize", handleResizeWindowInnerHeight);
+    window.addEventListener("resize", debounceHandleResizeWindowInnerHeight);
     return () => {
-      window.removeEventListener("resize", handleResizeWindowInnerHeight);
+      window.removeEventListener(
+        "resize",
+        debounceHandleResizeWindowInnerHeight
+      );
     };
   }, []);
 
